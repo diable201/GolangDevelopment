@@ -18,10 +18,10 @@ func Sqrt(x float64) float64 {
 func SqrtNewtonMethod(x float64) float64 {
 	z := 1.0
 	t := 0.0
-	i := 1
+	i := 0
 	for {
 		z, t = z-(z*z-x)/(2*z), z
-		fmt.Printf("Iteration = %v\n", i)
+		fmt.Printf("Iteration = %v\n", i+1)
 		fmt.Printf("z = %v, t = %v\n", z, t)
 		if math.Abs(t-z) < 1e-9 {
 			break
