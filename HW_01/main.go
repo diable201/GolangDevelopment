@@ -33,8 +33,8 @@ func SqrtNewtonMethod(x float64) float64 {
 
 func main() {
 	ourImplementation := SqrtNewtonMethod(5)
-	libraryImlementation := math.Sqrt(5)
+	libraryImplementation := math.Sqrt(5)
 	fmt.Printf("Guess: %v, Expected: %v, Error: %v\n",
-		ourImplementation, libraryImlementation,
-		math.Abs(ourImplementation-libraryImlementation))
+		ourImplementation, libraryImplementation,
+		math.Abs(ourImplementation-libraryImplementation))
 }
