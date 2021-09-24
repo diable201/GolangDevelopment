@@ -16,6 +16,11 @@ func Sqrt(x float64) float64 {
 }
 
 func SqrtNewtonMethod(x float64) float64 {
+	if x < 0 {
+		return -1
+	} else if x == 0 {
+		return 0
+	}
 	z := 1.0
 	t := 0.0
 	i := 0
