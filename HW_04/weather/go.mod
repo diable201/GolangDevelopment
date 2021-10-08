@@ -1,4 +1,4 @@
-module github.com/diable201/weather_bot
+module github.com/diable201/GolangDevelopment
 
 go 1.17
 

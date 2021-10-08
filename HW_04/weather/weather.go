@@ -31,7 +31,7 @@ func getWeather(location string) (result string) {
 	w, err := owm.NewCurrent("C", "en", apiKey)
 
 	if err != nil {
-		log.Print("getWeather() => newCurrent() error:\n", err)
+		log.Print("getWeather() error:\n", err)
 		return "error"
 	}
 
