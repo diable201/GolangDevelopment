@@ -26,7 +26,7 @@ type Weather struct {
 }
 
 func GetWeather(location string) (result string) {
-	os.Setenv("OWM_API_KEY", "0da53633dd6031b78d1751b43c170273")
+	os.Setenv("OWM_API_KEY", "YOUR-TOKEN")
 	apiKey := os.Getenv("OWM_API_KEY")
 	w, err := owm.NewCurrent("C", "en", apiKey)
 
