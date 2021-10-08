@@ -1,4 +1,4 @@
-module github.com/diable201/GolangDevelopment/HW_04/weather
+module github.com/diable201/GolangDevelopment/weather
 
 go 1.17
 
