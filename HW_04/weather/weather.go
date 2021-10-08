@@ -12,7 +12,7 @@ import (
 )
 
 func TestWeather(t *testing.T) {
-	v := getWeather("Almaty")
+	v := GetWeather("Almaty")
 	if v == "" {
 		t.Error("Expected weather, got empty string", v)
 	}
@@ -25,7 +25,7 @@ type Weather struct {
 	Clouds      int     `json:"clouds"`
 }
 
-func getWeather(location string) (result string) {
+func GetWeather(location string) (result string) {
 	os.Setenv("OWM_API_KEY", "0da53633dd6031b78d1751b43c170273")
 	apiKey := os.Getenv("OWM_API_KEY")
 	w, err := owm.NewCurrent("C", "en", apiKey)
@@ -48,7 +48,7 @@ func getWeather(location string) (result string) {
 	return result
 }
 
-func serializeWeather(location string) string {
+func SerializeWeather(location string) string {
 	os.Setenv("OWM_API_KEY", "0da53633dd6031b78d1751b43c170273")
 	apiKey := os.Getenv("OWM_API_KEY")
 	w, err := owm.NewCurrent("C", "en", apiKey)
@@ -67,7 +67,7 @@ func serializeWeather(location string) string {
 	return string(res)
 }
 
-func getTime(location string) (result string) {
+func GetTime(location string) (result string) {
 	loc, _ := time.LoadLocation(location)
 	time_ := time.Now().In(loc)
 	return time_.String()
