@@ -40,7 +40,7 @@ func main() {
 	close(jobs)
 	wg.Wait()
 
-	//Also, we can use this to print results
+	// Also, we can use this to print results
 	//for i := 1; i <= numJobs; i++ {
 	//	<-results
 	//}
