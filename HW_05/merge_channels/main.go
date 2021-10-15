@@ -43,6 +43,7 @@ func merge(cs ...<-chan int) <-chan int {
 func main() {
 	c1 := generateChannel(1, 6)
 	c2 := generateChannel(6, 11)
+	fmt.Println("Merging...")
 	for v := range merge(c1, c2) {
 		fmt.Printf("%v ", v)
 	}
