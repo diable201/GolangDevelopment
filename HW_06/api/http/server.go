@@ -34,7 +34,7 @@ func (s *Server) basicHandler() chi.Router {
 	r := chi.NewRouter()
 
 	r.Get("/anime", func(writer http.ResponseWriter, request *http.Request) {
-		anime, err := s.library.All(request.Context())
+		anime, err := s.library.Anime().All(request.Context())
 		if err != nil {
 			fmt.Fprintf(writer, "Unknown error: %v", err)
 			return
@@ -50,7 +50,7 @@ func (s *Server) basicHandler() chi.Router {
 			return
 		}
 
-		anime, err := s.library.ByID(request.Context(), id)
+		anime, err := s.library.Anime().ByID(request.Context(), id)
 		if err != nil {
 			fmt.Fprintf(writer, "Unknown error: %v", err)
 			return
@@ -64,7 +64,7 @@ func (s *Server) basicHandler() chi.Router {
 			fmt.Fprintf(writer, "Unknown error: %v", err)
 			return
 		}
-		s.library.Create(request.Context(), anime)
+		s.library.Anime().Create(request.Context(), anime)
 	})
 
 	r.Put("/anime", func(writer http.ResponseWriter, request *http.Request) {
@@ -73,7 +73,7 @@ func (s *Server) basicHandler() chi.Router {
 			fmt.Fprintf(writer, "Unknown error: %v", err)
 			return
 		}
-		s.library.Update(request.Context(), anime)
+		s.library.Anime().Update(request.Context(), anime)
 	})
 
 	r.Delete("/anime/{id}", func(writer http.ResponseWriter, request *http.Request) {
@@ -83,7 +83,60 @@ func (s *Server) basicHandler() chi.Router {
 			fmt.Fprintf(writer, "Unknown error: %v", err)
 			return
 		}
-		s.library.Delete(request.Context(), id)
+		s.library.Anime().Delete(request.Context(), id)
+	})
+
+	r.Get("/manga", func(writer http.ResponseWriter, request *http.Request) {
+		manga, err := s.library.Manga().All(request.Context())
+		if err != nil {
+			fmt.Fprintf(writer, "Unknown error: %v", err)
+			return
+		}
+		render.JSON(writer, request, manga)
+	})
+
+	r.Get("/manga/{id}", func(writer http.ResponseWriter, request *http.Request) {
+		idStr := chi.URLParam(request, "id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			fmt.Fprintf(writer, "Unknown error: %v", err)
+			return
+		}
+
+		manga, err := s.library.Manga().ByID(request.Context(), id)
+		if err != nil {
+			fmt.Fprintf(writer, "Unknown error: %v", err)
+			return
+		}
+		render.JSON(writer, request, manga)
+	})
+
+	r.Post("/manga", func(writer http.ResponseWriter, request *http.Request) {
+		manga := new(models.Manga)
+		if err := json.NewDecoder(request.Body).Decode(manga); err != nil {
+			fmt.Fprintf(writer, "Unknown error: %v", err)
+			return
+		}
+		s.library.Manga().Create(request.Context(), manga)
+	})
+
+	r.Put("/manga", func(writer http.ResponseWriter, request *http.Request) {
+		manga := new(models.Manga)
+		if err := json.NewDecoder(request.Body).Decode(manga); err != nil {
+			fmt.Fprintf(writer, "Unknown error: %v", err)
+			return
+		}
+		s.library.Manga().Update(request.Context(), manga)
+	})
+
+	r.Delete("/manga/{id}", func(writer http.ResponseWriter, request *http.Request) {
+		idStr := chi.URLParam(request, "id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			fmt.Fprintf(writer, "Unknown error: %v", err)
+			return
+		}
+		s.library.Manga().Delete(request.Context(), id)
 	})
 
 	return r

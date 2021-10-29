@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option go_package = "HW_07/api";
+package api;
+
+service AnimeService {
+  rpc GetAll(Empty) returns (AnimeList);
+  rpc Get(AnimeRequestId) returns (Anime);
+  rpc Post(Anime) returns (Anime);
+  rpc Put(Anime) returns (Anime);
+  rpc Delete(AnimeRequestId) returns (Empty);
+}
+
+message Empty {}
+
+message Anime {
+  int64 id = 1;
+  string title = 2;
+  string titleJapanese = 3;
+  string source = 4;
+  int32 episodes = 5;
+  string kind = 6;
+  double score = 7;
+  string status = 8;
+  string synopsis = 9;
+}
+
+message AnimeList {
+  repeated Anime anime = 1;
+}
+
+message AnimeRequestId {
+  int64 id = 1;
+}
